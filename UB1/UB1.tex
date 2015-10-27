@@ -11,6 +11,18 @@
 
 %%Inicio documento
 \begin{document} 
-Text
-\\
+    \begin{enumerate}
+         \item[Exercise 1:] Working with images
+    \end{enumerate}
+    \begin{enumerate}
+        \item[(a)] Write a function my loadImage that loads an image and display it (my showImage). Convert the image from uint8 to oating point representation (command double). Values should be in between 0 and 1. Use the functions image or imagesc.
+        \\
+        \\ img = double(imread(filename))/255; \\
+        \\ img is a 3-dimensional MxNx3 matrix, the elements in img(:,:,1) are interpreted as red intensities, in img(:,:,2) as green intensities, and in img(:,:,3) as blue intensities.
+        \\ 
+        \\  when we want to have all colors in a independent variable, we can make:
+        \\  imageBlau  = img(:,:,1);
+        \\  imageGreen = img(:,:,2);
+        \\  imageRed   = img(:,:,3);
+    \end{enumerate}
 \end{document}
