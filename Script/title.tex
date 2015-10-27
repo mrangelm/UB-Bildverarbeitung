@@ -1,0 +1,18 @@
+\begin{titlepage}
+        \flushright
+        \rule{\linewidth}{0.5mm}\\ [0.5cm]
+        {\bfseries \LARGE \GetLecture }\\
+        {\bfseries \large Wintersemester 2015/2016 }\\ [2.0cm]
+        {\bfseries \normalsize UNIVERSITÄT TÜBINGEN }\\ [3.0cm]
+
+        \foreach \FirstName/\SecondName/\Email in \GetAutors
+                {%
+                \FirstName \hspace{2mm}%
+                \SecondName%
+                \hfill%
+                \href{mailto:\Email}{\Email}%
+                \\}
+        \rule{\linewidth}{0.5mm}\\ [0.5cm]
+        \flushleft
+        {\bfseries \Huge Exercise \GetExercise }
+\end{titlepage}

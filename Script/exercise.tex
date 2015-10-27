@@ -1,0 +1,99 @@
+%
+% basic setup for page layout and document type
+%
+\documentclass[a4paper,ngerman,12pt]{scrartcl}
+
+%
+% load functionalities
+% Packages
+\input{../Script/packages}
+
+
+
+%
+% geometrical setup
+%
+%\geometry{a4paper,lmargin=20mm,rmargin=20mm,bmargin=20mm,tmargin=20mm, includeheadfoot}
+
+
+%
+% define own commands
+%
+\newcommand{\GetAutors}{}
+
+\newcommand{\SetLecture}[1]{%
+        \newcommand{\GetLecture}{#1}%
+}%
+
+\newcommand{\SetExercise}[1]{%
+        \newcommand{\GetExercise}{#1}%
+}%
+
+\newcommand{\SetLogo}[1]{%
+        \newcommand{\GetLogo}{#1}%
+}%
+
+\newcommand{\AddAutor}[3]{%
+        \global\edef\GetAutors{\GetAutors ,#1/#2/#3}%
+}%
+
+\newcommand*{\float}[1]{%
+    \pgfmathprintnumber[%
+        fixed,%
+        precision=4,%
+        fixed zerofill=true,%
+        ]{#1}%
+}%
+
+\newcommand*{\hint}[2]{%
+        \vspace{4em}{%
+                \footnotesize%
+                \begin{addmargin}[2em]{2em}%
+                \textbf{\hspace{-2em}\footnotesize\textbf{#1}}%
+                 #2%
+                \end{addmargin}%
+        }}
+
+%\newcommand*{\ImageFromCache}[2]{%
+%        \begin{figure}[H]%
+%                \centering%
+%                \includegraphics[width=15cm, height=10cm,keepaspectratio]{./cache/graphics/#1}
+%                \caption{#2}%
+%        \end{figure}}
+
+\newcommand\Logo[1]{%
+        \put(0,0){%
+                \parbox[b][\paperheight]{10cm}{%
+                        \vfill
+                        %\centering
+                        \hspace*{3cm}
+                        \vspace*{14cm}
+                        \includegraphics[width=5cm,%
+                        keepaspectratio]{../UB1/images/8-8.jpg}%
+                        \vfill}}}
+
+\AtBeginDocument{%
+        %
+        % fancy setup
+        %
+        \fancyhf{}%
+        \pagestyle{fancy}%
+        \fancyheadoffset{1cm}%
+        \fancyhead[L]{\small{\GetLecture}}%
+        \fancyhead[R]{\small{Exercise \GetExercise}}%
+        \fancyfoot[C]{\small{%
+                \foreach \FirstName/\SecondName/\Email in \GetAutors%
+                        { \FirstName \hspace{2mm}\SecondName \hspace{10mm}}}}
+        \fancyfoot[R]{\small{\thepage}}%
+        %
+        \titleformat{\title}{\large\bfseries}{\thesection}{1em}{}%
+        \titleformat{\section}{\large\bfseries}{\thesection}{1em}{}%
+        \titleformat{\subsection}{\normalfont\fontsize{20}{15}\bfseries}{\thesubsection}{2em}{}%
+        \titleformat{\subsubsection}{\normalfont\fontsize{18}{15}\bfseries}{\thesubsubsection}{2em}{}%
+        %
+        \AddToShipoutPicture*{\Logo{\GetLogo}}%
+        \input{../../script/title}%
+        \setcounter{section}{\GetExercise}
+}
+
+\newcommand{\xmark}{\ding{55}}
