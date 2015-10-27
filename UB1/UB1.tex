@@ -7,7 +7,7 @@
 \AddAutor{Angel}{Rangel}{angel-eduardo.rangel-mendez@student.uni-tuebingen.de}
 \AddAutor{Ido}{}{@student.uni-tuebingen.de}
 \SetLogo{mb}
-
+\graphicspath{ {images/} }
 
 %%Inicio documento
 \begin{document} 
@@ -17,19 +17,16 @@
     \begin{enumerate}
         \item[(a)] Write a function my loadImage that loads an image and display it (my showImage). Convert the image from uint8 to oating point representation (command double). Values should be in between 0 and 1. Use the functions image or imagesc.
         \\
-        \\ img = double(imread(filename))/255; \\
-        \\ img is a 3-dimensional MxNx3 matrix, the elements in img(:,:,1) are interpreted as red intensities, in img(:,:,2) as green intensities, and in img(:,:,3) as blue intensities.
-        \\ 
-        \\  when we want to have all colors in a independent variable, we can make:
-        \\  imageBlau  = img(:,:,1);
-        \\  imageGreen = img(:,:,2);
-        \\  imageRed   = img(:,:,3);
-        \\
-        \begin{figure}[ht]
-        	\centering
-            \includegraphics[width=0.33\textwidth]{images/SolutionFirstPart.fig}
-        	\caption{Original Image}
-        	\label{fig1}
-        \end{figure}
+        \\ my_loadImage:
+        \\  img \ = \ double(imread(filename))/255;
+        \\\\ $img \ is \ a \ 3-dimensional \ MxNx3 \ matrix, \ the \ elements \ in \ img(:,:,1) \ are \ interpreted \ as \ red \ intensities, \ in \ img(:,:,2) \ as \ green \ intensities, \ and \ in \ img(:,:,3) \ as \ blue \ intensities.$
+        \\\\ my showImage:
+        \\ $ imagesc(img) $
+        \\\\
+    	\centering
+        \includegraphics[scale=0.58]{images/SolutionFirstPart.jpg} 
+        \\\\
+        \item[(b)] Write two functions my RGBSplit and my plotRGBSplit that split the R, G and B channels of an image and display them separately. The plots should all be included in a single figure (use subplot). Each channel should be plotted in its primary color.
+        \\\\
     \end{enumerate}
 \end{document}
