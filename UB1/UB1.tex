@@ -2,10 +2,11 @@
 \input{../Script/exercise}
 
 
-\SetLecture{Graphische Datenverarbeitung}
+\SetLecture{Bildverarbeitung}
 \SetExercise{1}
 \AddAutor{Angel}{Rangel}{angel-eduardo.rangel-mendez@student.uni-tuebingen.de}
-\AddAutor{Ido}{}{@student.uni-tuebingen.de}
+\AddAutor{Ido Freeman}{}{freeman@informatik.uni-tuebingen.de}
+\AddAutor{Astrid Kreuzburg}{}{astrid.creuzburg@student.uni-tuebingen.de}
 \SetLogo{mb}
 \graphicspath{ {images/} }
 
@@ -15,7 +16,7 @@
          \item[Exercise 1:] Working with images
     \end{enumerate}
     \begin{enumerate}
-        \item[(a)] Write a function my loadImage that loads an image and display it (my showImage). Convert the image from uint8 to oating point representation (command double). Values should be in between 0 and 1. Use the functions image or imagesc.
+        \item[(a)] {Write a function my loadImage that loads an image and display it (my showImage). Convert the image from uint8 to oating point representation (command double). Values should be in between 0 and 1. Use the functions image or imagesc.}
     \end{enumerate}
         \\
         \\ my loadImage:
@@ -26,9 +27,9 @@
         \\\\
     	\centering
         \includegraphics[scale=0.58]{images/SolutionFirstPart.jpg} 
-        \\\\
+        \\ \pagebreak
     \begin{enumerate}        
-        \item[(b)] Write two functions my RGBSplit and my plotRGBSplit that split the R, G and B channels of an image and display them separately. The plots should all be included in a single figure (use subplot). Each channel should be plotted in its primary color.
+        \item[(b)] {Write two functions my RGBSplit and my plotRGBSplit that split the R, G and B channels of an image and display them separately. The plots should all be included in a single figure (use subplot). Each channel should be plotted in its primary color.}
     \end{enumerate}
         \\\\
         \\ my RGBSplit:
@@ -64,17 +65,64 @@
         \\ im(4) = imshow(Icol);
         \\ title({'Original', '[x: 0, y: 0]'});
         \\\\\
-        \includegraphics[scale=0.58]{images/SolutionSecPart.jpg} 
-        \\
-        \includegraphics[scale=0.6]{images/SolutionThreethPart.jpg} 
-        \\\\
+        \includegraphics[scale=0.5]{images/SolutionSecPart.jpg} 
+        \includegraphics[scale=0.7]{images/SolutionThreethPart.jpg} 
+        \\ \pagebreak
     \begin{enumerate}        
         \item[(c)] Implement a gamma correction for images (my gammaCorrection).
         \\
     \end{enumerate}
         \\
         Gamma Correction:
-        $$ GW = 2.2;$$
-        $$ imgGC = 255*((img/255).^(1/GW))$$
-     
+        \\\\ imgGC = 255*((img/255).^(1/GW))
+        \\\\
+        \\ GW = 2.2; \\
+        \includegraphics[scale=0.4]{images/SolutionFourth2Part.jpg}
+        \\ GW = 0.8; \\
+        \includegraphics[scale=0.4]{images/SolutionFourthPart.jpg}
+        \\ \pagebreak
+    \begin{enumerate}        
+        \item[(d)] {Write a function my RGB2Gray that converts an image to grayscale. Apply your gamma correction before converting the image to grayscale.}
+    \end{enumerate}        
+        \\
+        \\ my RGB2Gray:
+        \\\\ imgGray = rgb2gray(img)
+        \\\\
+        \includegraphics[scale=0.4]{images/SolutionImagD.jpg}
+        \\ \ \\
+        \includegraphics[scale=0.4]{images/SolutionImagD2.jpg}
+        \\ \pagebreak
+    \begin{enumerate}
+         \item[Exercise 2:] Histograms
+    \end{enumerate}
+    \\\\
+    \begin{enumerate}        
+        \item[(a)] {Create Histograms [2 points]: Implement a function "my hist" which computes the grayscale histogram of an image. Implement a plotting function for your histogram (my plotHist).
+            Double-check your result using the Matlab functions hist or histc. What can be read out of the histogram  in general as well as for the given image?}
+    \end{enumerate}
+    \\\\
+    \raggedright{
+    \textbf{my hist:}
+    \\ \ \\
+    imgGray = uint8(imgGray*255);
+    \\ [f,c]=size(imgGray);
+    \\
+    \\ for i=1:256
+    \\ \ \ \ \ \ h(i) = 0;
+    \\ end
+    \\
+    \\ for i=1:f
+       \\ \ \ \ \ \ for j=1:c
+           \\ \ \ \ \ \ \ \ \ \ \ k = imgGray(i,j);
+           \\ \ \ \ \ \ \ \ \ \ \ h(k+1) = h(k+1)+1;
+       \\ \ \ \ \ \ end
+    \\ end
+    \\ \ \\
+    \\ hist = h;}
+    \\ \ \\
+    \textbf{my plotHist:}
+    \\ \ \\
+    figure;
+    \\ plot(0:255, hist);
+    \\\\
 \end{document}
