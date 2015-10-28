@@ -16,8 +16,9 @@
     \end{enumerate}
     \begin{enumerate}
         \item[(a)] Write a function my loadImage that loads an image and display it (my showImage). Convert the image from uint8 to oating point representation (command double). Values should be in between 0 and 1. Use the functions image or imagesc.
+    \end{enumerate}
         \\
-        \\ my_loadImage:
+        \\ my loadImage:
         \\  img \ = \ double(imread(filename))/255;
         \\\\ $img \ is \ a \ 3-dimensional \ MxNx3 \ matrix, \ the \ elements \ in \ img(:,:,1) \ are \ interpreted \ as \ red \ intensities, \ in \ img(:,:,2) \ as \ green \ intensities, \ and \ in \ img(:,:,3) \ as \ blue \ intensities.$
         \\\\ my showImage:
@@ -26,7 +27,44 @@
     	\centering
         \includegraphics[scale=0.58]{images/SolutionFirstPart.jpg} 
         \\\\
+    \begin{enumerate}        
         \item[(b)] Write two functions my RGBSplit and my plotRGBSplit that split the R, G and B channels of an image and display them separately. The plots should all be included in a single figure (use subplot). Each channel should be plotted in its primary color.
-        \\\\
     \end{enumerate}
+        \\\\
+        \\ my RGBSplit:
+        \\ split the RGB channels:
+        \\ imgR = imgRGB(:,:,1);
+        \\ imgG = imgRGB(:,:,2);
+        \\ imgB = imgRGB(:,:,3);
+        \\
+        \\ my_plotRGBSplit:
+        \\ [height0 , width0] = size(imgR);
+        \\ [height1 , width1] = size(imgG);
+        \\ [height2 , width2] = size(imgB);
+        \\
+        \\ Roff = struct('img', imgR, 'x', height0, 'y', width0);
+        \\ Goff = struct('img', imgG, 'x', height1, 'y', width1);
+        \\ Boff = struct('img', imgB, 'x', height2, 'y', width2);
+        \\
+        \\ Icol = imgRGB;
+        \\ --figure layout
+        \\ ax(1) = subplot(2,2,1);
+        \\ im(1) = imshow(Roff.img);
+        \\ title({'Red Channel', '[x: 0, y: 0]'});
+        \\
+        \\ ax(2) = subplot(2,2,2);
+        \\ im(2) = imshow(Goff.img);
+        \\ title({'Green Channel', '[x: 0, y: 0]'});
+        \\
+        \\ ax(3) = subplot(2,2,3);
+        \\ im(3) = imshow(Boff.img);
+        \\ title({'Blue Channel', '[x: 0, y: 0]'});
+        \\
+        \\ ax(4) = subplot(2,2,4);
+        \\ im(4) = imshow(Icol);
+        \\ title({'Original', '[x: 0, y: 0]'});
+        \\\\\
+        \includegraphics[scale=0.58]{images/SolutionSecPart.jpg} 
+        \\\\
+    
 \end{document}
