@@ -102,9 +102,11 @@
         \\ for i=1:3
         \\ \ \ \ imgGray(:,:,i) = gray;
         \\ end
-        \\\\ }
-        \includegraphics[scale=0.4]{images/SolutionImagD.jpg}
-        \\ 
+        }
+        \\ \ \\
+        \centering{
+        \includegraphics[scale=0.8]{images/SolutionImagD.jpg}
+        }\\ 
 \pagebreak
     \begin{enumerate}
          \item[Exercise 2:] Histograms
@@ -140,7 +142,7 @@
     \\ plot(0:255, hist);
     \\ \ \\
     \centering{
-    \includegraphics[scale=0.4]{images/2a1.jpg}
+    \includegraphics[scale=0.45]{images/2a1.jpg}
     \\ \ 
     \includegraphics[scale=0.4]{images/2a2.jpg}
     \\ \ 
@@ -148,10 +150,110 @@
     \\ \ 
     \includegraphics[scale=0.4]{images/2a4.jpg}
     }\\ \ 
-    What can be read out of the histogram { in general as well as for the given image? TODO \pagebreak
+    What can be read out of the histogram { in general as well as for the given image? TODO 
+\pagebreak
     \begin{enumerate}        
         \item[(b)] {Contrast stretching [1 point]: Implement a function my maxContrast that maximizes the contrast of an image.}
     \end{enumerate}
     \\ \ \\
-    
+    \raggedright{
+    my maxContrast: \\ \ \\
+    [x,y,z] = size(imgGray);
+    \\
+    \\ \%Quelle: http://sabia.tic.udc.es/gc/Contenidos%20adicionales/trabajos/Imagenyvideo/Procesado%20Digital%20de%20la%20Imagen/pagina_superior5.htm
+    \\ \% alle Werte in einer Funktion f(x)
+    \\ imgGray = reshape(imgGray, x*y*z, 1, 1);
+
+    \\ \% f(x)min
+    \\ black = min(imgGray);
+    \\ \% f(x)max
+    \\ white = max(imgGray);
+    \\
+    \\ \% f(x) - f(x)min
+    \\ imgGray = imgGray - black;
+    \\ \% max - min
+    \\ white = white - black;
+    \\
+    \\ \% f(x) - f(x)min/(max-min)
+    \\ \% imgGray = imgGray ./ white;
+    \\ imgGray = imgGray ./ white;
+    \\ imgGray = imgGray + min(imgGray);
+    \\
+    \\ imgGray = reshape(imgGray, x, y, z);
+    \\
+    \\ imgGrayMaxHist = imgGray;
+    \\ maxHist = my_hist(imgGray);
+    \\ \ \\
+    \\ \ \\
+    \%\% exercise 2b
+    \\ close all;
+    \\ clc
+
+    \\  [maxImg, maxHist] = my_maxContrast(imgGray);
+    \\
+    \\  my_showImage(maxImg);
+    \\  my_plotHist(maxHist);
+    \\  imgGray2 = rgb2gray(imgGray); {\color{red} \% kleine Anderung ######## }
+    \\ \%solution
+    \\  exercise_2b(imgGray2);
+    \\ \ \\
+    }
+\pagebreak
+    \centering{
+    \includegraphics[scale=0.6]{images/2b1.jpg}
+    \\ \ 
+    \includegraphics[scale=0.6]{images/2b2.jpg}
+    }\\ \
+    \raggedright{ Look at the plot and discuss the result.
+    \\TODO
+    }
+\pagebreak
+    \begin{enumerate}        
+        \item[(c)] {Histogram Equalization [3 points]: Calculate a normalized accumulated histogram (my accumulatedHist). Implement histogram equalization (my histEqualization) that receives the grayscale image and the accumulated histogram as parameters.}
+    \end{enumerate}
+    \\ \ \\
+    \raggedright{
+    \\ my accumulatedHist:
+    \\ \ \\ aHist = zeros(256, 1);
+    \\ sHist = my_hist(imgGray);
+    \\
+    \\ accumulate= 0;
+    \\ for i = 0:255
+    \\ \ \ \ \ accumulate = accumulate + sHist(i+1);
+    \\ \ \ \ \ aHist(i+1) = accumulate;
+    \\ end
+    \\
+    \\ aHist = double(aHist);
+    \\ aHist = aHist .* (1 / max(aHist));
+    \\ \ \\
+    \\   my histEqualization:
+    \\
+    \\  [a,b,c] = size(imgGray);
+    \\ imgHE = zeros(a,b,c);
+    \\
+    \\ imgGray = uint8(imgGray*255);
+    \\
+    \\  for y = 1:a
+    \\  \ \ \ for x = 1:b
+    \\  \ \ \ \ \ \    intensity = aHist(imgGray(y,x,1)+1);
+    \\  \ \ \ \ \ \    imgHE(y,x,:) = [intensity intensity intensity];
+    \\  \ \ \  end
+    \\ end \\
+    }
+\pagebreak
+\centering{
+    \\ \ \\
+    \includegraphics[scale=0.6]{images/3b1.jpg}
+    \\ \ \\
+    \includegraphics[scale=0.6]{images/3b2.jpg}
+    \\ \ \\
+    \includegraphics[scale=0.6]{images/3b3.jpg}
+    \\ \ \\
+    \includegraphics[scale=0.6]{images/3b4.jpg}
+    }\\ \
+\pagebreak
+\raggedright{
+    \\ \ \\ Discuss the result.
+    \\ TODO
+    }
 \end{document}
